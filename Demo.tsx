@@ -85,7 +85,7 @@ export default function BasicTextFields() {
         <FormControl variant="standard" required>
           <InputLabel
             htmlFor="component-helper"
-            shrink={false}
+            shrink={true}
             sx={{
               color: 'text',
               fontSize: 16,
