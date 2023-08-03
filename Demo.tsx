@@ -62,6 +62,13 @@ const mediShoutTheme = createTheme({
     fontWeightLight: 300,
     fontWeightRegular: 400,
   },
+  components: {
+    MuiFormLabel: {
+      styleOverrides: {
+        asterisk: { color: 'red' },
+      },
+    },
+  },
 });
 
 export default function BasicTextFields() {
@@ -75,11 +82,16 @@ export default function BasicTextFields() {
         noValidate
         autoComplete="off"
       >
-        <FormControl variant="standard">
+        <FormControl variant="standard" required>
           <InputLabel
             htmlFor="component-helper"
-            shrink={true}
-            sx={{ color: 'Black', fontSize: 22, position: 'static' }}
+            shrink={false}
+            sx={{
+              color: 'text',
+              fontSize: 16,
+              position: 'static',
+              transform: 'none',
+            }}
           >
             This is a label
           </InputLabel>
@@ -87,7 +99,7 @@ export default function BasicTextFields() {
             id="component-helper"
             placeholder="I am some placeholder text"
             aria-describedby="component-helper-text"
-            sx={{ mt: -1 }}
+            sx={{ mt: 1, height: '38px' }}
           />
           <FormHelperText id="component-helper-text">
             Some important helper text
