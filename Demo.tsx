@@ -1,87 +1,99 @@
 import * as React from 'react';
-import { alpha, styled } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
 import Box from '@mui/material/Box';
+import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
-import TextField, { TextFieldProps } from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
-import { OutlinedInputProps } from '@mui/material/OutlinedInput';
+import FormHelperText from '@mui/material/FormHelperText';
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
-const CssTextField = styled(TextField)({
-  '& label.Mui-focused': {
-    color: '#A0AAB4',
+declare module '@mui/material/styles' {
+  interface Theme {}
+  // allow configuration using `createTheme`
+  interface ThemeOptions {}
+}
+
+const mediShoutTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#17C78A',
+      contrastText: '#FFFFFF',
+      light: '#39CF9E',
+      dark: '#487B6B',
+    },
+    secondary: {
+      main: '#5CACEE',
+      contrastText: '#FFFFFF',
+      light: '#76B9F2',
+      dark: '#6D87C3',
+    },
+    text: {
+      primary: '#1D2220',
+      secondary: '#505251',
+      disabled: '#D8D7D7',
+    },
+    background: {
+      default: '#F7F7F7',
+    },
+    error: {
+      main: '#E54141',
+      dark: '#C02B4C',
+      light: '#D45F76',
+    },
+    info: {
+      main: '#8ED6E1',
+      light: '#BCE7EF',
+      dark: '#6D87C3',
+    },
+    warning: {
+      main: '#D6CA2D',
+      light: '#E4E683',
+      dark: '#756B11',
+    },
+    success: {
+      main: '#17C78A',
+      light: '#78DEBD',
+      dark: '#487B6B',
+    },
+    divider: 'rgba(216,215,215,0.4)',
   },
-  '& .MuiInput-underline:after': {
-    borderBottomColor: '#B2BAC2',
-  },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: '#E0E3E7',
-    },
-    '&:hover fieldset': {
-      borderColor: '#B2BAC2',
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: '#6F7E8C',
-    },
+  typography: {
+    fontFamily: 'Lato,Roboto,"Helvetica Neue",Arial',
+    fontSize: 14,
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
   },
 });
 
-const BootstrapInput = styled(InputBase)(({ theme }) => ({
-  'label + &': {
-    marginTop: theme.spacing(3),
-  },
-  '& .MuiInputBase-input': {
-    borderRadius: 4,
-    position: 'relative',
-    backgroundColor: theme.palette.mode === 'light' ? '#FFFFFF' : '#1A2027',
-    border: '1px solid',
-    borderColor: theme.palette.mode === 'light' ? '#E0E3E7' : '#2D3843',
-    fontSize: 16,
-    width: 'auto',
-    padding: '10px 12px',
-    transition: theme.transitions.create([
-      'border-color',
-      'background-color',
-      'box-shadow',
-    ]),
-    // Use the system font instead of the default Roboto font.
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
-    '&:focus': {
-      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-      borderColor: theme.palette.primary.main,
-    },
-  },
-}));
-
-export default function CustomizedInputsStyled() {
+export default function BasicTextFields() {
   return (
-    <Box
-      component="form"
-      noValidate
-      sx={{
-        display: 'grid',
-        gridTemplateColumns: { sm: '1fr 1fr' },
-        gap: 2,
-      }}
-    >
-      <FormControl variant="standard">
-        <InputLabel shrink htmlFor="bootstrap-input">
-          Bootstrap
-        </InputLabel>
-        <BootstrapInput defaultValue="react-bootstrap" id="bootstrap-input" />
-      </FormControl>
-    </Box>
+    <ThemeProvider theme={mediShoutTheme}>
+      <Box
+        component="form"
+        sx={{
+          '& > :not(style)': { width: '100%' },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <FormControl variant="standard">
+          <InputLabel
+            htmlFor="component-helper"
+            shrink={true}
+            sx={{ color: 'Black', fontSize: 22, position: 'static' }}
+          >
+            This is a label
+          </InputLabel>
+          <OutlinedInput
+            id="component-helper"
+            placeholder="I am some placeholder text"
+            aria-describedby="component-helper-text"
+            sx={{ mt: -1 }}
+          />
+          <FormHelperText id="component-helper-text">
+            Some important helper text
+          </FormHelperText>
+        </FormControl>
+      </Box>
+    </ThemeProvider>
   );
 }
